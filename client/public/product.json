@@ -1,0 +1,42 @@
+[
+  {
+    "_id": "1",
+    "name": "Trendy T-Shirt",
+    "description": "A stylish and comfortable t-shirt suitable for everyday wear.",
+    "price": 19.99,
+    "image": "https://images.snowleader.com/cdn-cgi/image/f=auto,fit=scale-down,q=85/https://images.snowleader.com/media/catalog/product/cache/1/image/0dc2d03fe217f8c83829496872af24a0/o/c/octo-t-shirt-black-configurable-makiacloth-maki00380_03_1.jpg",
+    "category": "popular"
+  },
+  {
+    "_id": "2",
+    "name": "Leather Wallet",
+    "description": "A high-quality leather wallet with multiple compartments for cards and cash.",
+    "price": 29.99,
+    "image": "",
+    "category": "popular"
+  },
+  {
+    "_id": "3",
+    "name": "Smartwatch",
+    "description": "A sleek smartwatch with fitness tracking and notification features.",
+    "price": 149.99,
+    "image": "https://www.tohome.com/images/Products/500/25082022/GTS4MiniMidnightBlack1.jpg",
+    "category": "popular"
+  },
+  {
+    "_id": "4",
+    "name": "Logo Mug",
+    "description": "A ceramic mug featuring the company logo, perfect for coffee or tea.",
+    "price": 9.99,
+    "image": "",
+    "category": "popular"
+  },
+  {
+    "_id": "5",
+    "name": "Pop Socket",
+    "description": "A collapsible grip and stand for your phone, with various designs available.",
+    "price": 5.99,
+    "image": "https://media.wired.com/photos/5bf3448d600e05096052e04e/master/pass/popsocket.jpg",
+    "category": "Swags"
+  }
+]
