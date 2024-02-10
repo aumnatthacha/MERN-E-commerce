@@ -30,7 +30,7 @@ const Card = ({ item }) => {
                 </Link>
                 <p>{description}</p>
                 <div className="card-action justify-between items-center mt-2">
-                    <h5 className="font-semibold">{price} $</h5>
+                    <h5 className="font-semibold text-gray-500">$ {price}</h5>
                     <button className="btn bg-red text-white">Add to Cart</button>
                 </div>
             </div>

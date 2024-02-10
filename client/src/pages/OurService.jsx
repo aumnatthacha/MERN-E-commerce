@@ -3,26 +3,26 @@ const OurService = () => {
     {
       id: 1,
       title: "High-Quality Products",
-      description: "We offer",
+      description: "We offer a curated selection of high-quality products",
       image: "/images/home/services/assurance.png",
     },
     {
       id: 2,
-      title: "High-Quality Products",
-      description: "We offer",
-      image: "/images/home/services/assurance.png",
+      title: "Fast-Delivery",
+      description: "We deliver your order promptly to your door",
+      image: "/images/home/services/fast-delivery.png",
     },
     {
       id: 3,
-      title: "High-Quality Products",
-      description: "We offer",
-      image: "/images/home/services/assurance.png",
+      title: "Online Ordering",
+      description: "Explore products & order with ease using our Online Ordering n",
+      image: "/images/home/services/order.png",
     },
     {
       id: 4,
-      title: "High-Quality Products",
-      description: "We offer",
-      image: "/images/home/services/assurance.png",
+      title: "Gift Cards",
+      description: "Give the gift of exceptional dining with SE Shop Gift Cards",
+      image: "/images/home/services/gift.png",
     },
   ]
   return (
@@ -53,37 +53,39 @@ const OurService = () => {
           </div>
         </div>
       </div>
-      <div className="section-container">
+      <div className="section-container md:m-12 ">
         <footer className="footer p-10 bg-white text-base-content">
-          <nav>
-            <img src="/logo.png" alt="" className='h-12 pr-1 mx-auto' />
-            <a className="link link-hover">Design</a>
-            <a className="link link-hover">Marketing</a>
-            <a className="link link-hover">Advertisement</a>
+          <nav className="text-gray-500">
+            <img src="/logo.png" alt="" className='h-12 pr-1' />
+            <a className="link link-hover">Our Mission: To Merge</a>
+            <a className="link link-hover">Fashion with</a>
+            <a className="link link-hover">Functionality in the</a>
+            <a className="link link-hover">Engineering</a>
           </nav>
-          <nav>
-            <h6 className="footer-title">Company</h6>
+          <nav className="text-gray-500">
+            <h6 className="footer-title">USEFUL LINKS</h6>
             <a className="link link-hover">About us</a>
-            <a className="link link-hover">Contact</a>
-            <a className="link link-hover">Jobs</a>
-            <a className="link link-hover">Press kit</a>
+            <a className="link link-hover">Events</a>
+            <a className="link link-hover">Blogs</a>
+            <a className="link link-hover">FAQ</a>
           </nav>
-          <nav>
-            <h6 className="footer-title">Legal</h6>
-            <a className="link link-hover">Terms of use</a>
-            <a className="link link-hover">Privacy policy</a>
-            <a className="link link-hover">Cookie policy</a>
+          <nav className="text-gray-500">
+            <h6 className="footer-title">MAIN MENU</h6>
+            <a className="link link-hover">Home</a>
+            <a className="link link-hover">Offers</a>
+            <a className="link link-hover">Products</a>
+            <a className="link link-hover">Reservation</a>
           </nav>
-          <nav>
-            <h6 className="footer-title">Legal</h6>
-            <a className="link link-hover">Terms of use</a>
-            <a className="link link-hover">Privacy policy</a>
-            <a className="link link-hover">Cookie policy</a>
+          <nav className="text-gray-500">
+            <h6 className="footer-title">CONTACT US</h6>
+            <a className="link link-hover">example@email.com</a>
+            <a className="link link-hover">+66 958 248 966</a>
+            <a className="link link-hover">Social media</a>
           </nav>
         </footer>
         <footer className="footer px-10 py-4 border-t bg-white text-base-content border-base-300">
-          <aside className="items-center grid-flow-col">
-            <p>Providing reliable tech since 1992</p>
+          <aside className="items-center grid-flow-col text-gray-500">
+            <p>Copyright 2024 - All right reserved</p>
           </aside>
           <nav className="md:place-self-center md:justify-self-end">
             <div className="grid grid-flow-col gap-4">

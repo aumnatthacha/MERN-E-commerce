@@ -1,42 +1,42 @@
 [
   {
     "_id": "1",
-    "name": "Trendy T-Shirt",
-    "description": "A stylish and comfortable t-shirt suitable for everyday wear.",
-    "price": 19.99,
-    "image": "https://images.snowleader.com/cdn-cgi/image/f=auto,fit=scale-down,q=85/https://images.snowleader.com/media/catalog/product/cache/1/image/0dc2d03fe217f8c83829496872af24a0/o/c/octo-t-shirt-black-configurable-makiacloth-maki00380_03_1.jpg",
+    "name": "Della Cavalleria t-shirt",
+    "description": "Straight t-shirt in Della Cavalleria printed cotton",
+    "price": 578.37,
+    "image": "https://assets.hermes.com/is/image/hermesproduct/della-cavalleria-t-shirt--4E4629DA90-worn-1-0-0-800-800_g.jpg",
     "category": "popular"
   },
   {
     "_id": "2",
-    "name": "Leather Wallet",
-    "description": "A high-quality leather wallet with multiple compartments for cards and cash.",
-    "price": 29.99,
-    "image": "",
+    "name": "Dogon Compact wallet",
+    "description": "Compact wallet in Evercolor calfskin",
+    "price": 2150,
+    "image": "//assets.hermes.com/is/image/hermesproduct/dogon-compact-wallet--066382CK37-worn-1-0-0-1600-1600-q99_g.jpg",
     "category": "popular"
   },
   {
     "_id": "3",
-    "name": "Smartwatch",
-    "description": "A sleek smartwatch with fitness tracking and notification features.",
-    "price": 149.99,
-    "image": "https://www.tohome.com/images/Products/500/25082022/GTS4MiniMidnightBlack1.jpg",
+    "name": "Apple Watch Hermès",
+    "description": "Apple Watch Hermès",
+    "price": 1185.14,
+    "image": "https://watchesbysjx.com/wp-content/uploads/2019/09/apple-watch-hermes-series-5-4.jpg",
     "category": "popular"
   },
   {
     "_id": "4",
-    "name": "Logo Mug",
-    "description": "A ceramic mug featuring the company logo, perfect for coffee or tea.",
-    "price": 9.99,
-    "image": "",
+    "name": "H Deco mug n°2",
+    "description": "The H Deco collection",
+    "price": 120.00,
+    "image": "//assets.hermes.com/is/image/hermesproduct/h-deco-mug-n-2--037131P-worn-1-0-0-1600-1600-q99_g.jpg",
     "category": "popular"
   },
   {
     "_id": "5",
-    "name": "Pop Socket",
-    "description": "A collapsible grip and stand for your phone, with various designs available.",
-    "price": 5.99,
-    "image": "https://media.wired.com/photos/5bf3448d600e05096052e04e/master/pass/popsocket.jpg",
+    "name": "Pop Grip",
+    "description": "Dainty Cosmic Polished Enamel PopGrip",
+    "price": 16.44,
+    "image": "https://popsockets.co.th/cdn/shop/files/QRX_Enamel_Dainty-Cosmic_03_Expanded_700x.png?v=1695237791",
     "category": "Swags"
   }
 ]
