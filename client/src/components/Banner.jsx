@@ -8,7 +8,7 @@ const Banner = () => {
             <div className='bg-white px-3 py-2 rounded-2x1 flex items-center gap-3 shadow-sm w-64'>
               <img src="/images/home/gamepad.png" alt="" className='rounded-2x1 w-20' />
               <div className='space-y-1'>
-                <h5>Game Pad</h5>
+                <h5>Gamepad</h5>
                 <div className="rating rating-sm">
                   <input type="radio" name="rating-3" className="mask mask-heart bg-red-400" />
                   <input type="radio" name="rating-3" className="mask mask-heart bg-orange-400" checked />
@@ -24,7 +24,7 @@ const Banner = () => {
             <div className='bg-white px-3 py-2 rounded-2x1 flex items-center gap-3 shadow-sm w-64'>
               <img src="/images/home/headphone.png" alt="" className='rounded-2x1 w-20' />
               <div className='space-y-1'>
-                <h5>Head phone</h5>
+                <h5>Headphone </h5>
                 <div className="rating rating-sm ">
                   <input type="radio" name="rating-3" className="mask mask-heart bg-red-400" />
                   <input type="radio" name="rating-3" className="mask mask-heart bg-orange-400" checked />
