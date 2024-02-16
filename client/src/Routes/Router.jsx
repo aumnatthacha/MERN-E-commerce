@@ -16,7 +16,6 @@ const router = createBrowserRouter([
             path: "/shop",
             element: <ProductList/>
         }
-        //การดึง shop เข้ามาใช้
       ]
     },
   ]);
