@@ -1,27 +1,27 @@
 const categoryItems = [
   {
     id: 1,
-    title: "Clothing",
+    title: "Design",
     description: "(68 items)",
-    image: "/images/home/category/img1.jpg"
+    image: "https://www.mydixi.com/wp-content/uploads/2021/02/UIUX.jpg"
   },
   {
     id: 2,
-    title: "Gadgets",
+    title: "Developer",
     description: "(48 items)",
-    image: "/images/home/category/img2.jpg"
+    image: "https://miro.medium.com/v2/resize:fit:600/1*uHlx-j01g5ybkJ2d_8dtyQ.png"
   },
   {
     id: 3,
-    title: "Accessories",
+    title: "Business",
     description: "(12 items)",
-    image: "/images/home/category/img3.jpg"
+    image: "https://www.quickserv.co.th/products/update/20190418-030516-solution.png"
   },
   {
     id: 4,
-    title: "Swag",
+    title: "Data",
     description: "(255 items)",
-    image: "/images/home/category/img4.jpg"
+    image: "https://images.shiksha.com/mediadata/shikshaOnline/mailers/2021/naukri-learning/oct/28oct/What-is-Data-Analysis.jpg"
   },
 ]
 
