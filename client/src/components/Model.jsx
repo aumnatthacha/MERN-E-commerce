@@ -7,11 +7,14 @@ import { BiLogoGmail } from "react-icons/bi";
 import { FaFacebookF } from "react-icons/fa";
 import { FaGithubAlt } from "react-icons/fa";
 import { AuthContext } from "../context/AuthProvider";
-
+import { useNavigate } from "react-router-dom";  
 
 const Modal = ({ name }) => {
   const { login, createUser, signUpWithGoogle } = useContext(AuthContext);
   const [isLogin, setIsLogin] = useState(true);
+  const navigate = useNavigate();
+
+  const from = location?.state?.pathname || "/";
 
   const closeModal = () => {
     const modal = document.getElementById(name);
@@ -33,7 +36,9 @@ const Modal = ({ name }) => {
       login(data.email, data.password)
         .then((result) => {
           const user = result.user;
-          console.log(user);
+          //console.log(user);
+          document.getElementById(name).close();
+          navigate(from, { replace: true });
           alert("Login Successful");
         })
         .catch((error) => {
