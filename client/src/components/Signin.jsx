@@ -61,8 +61,10 @@ const Signin = () => {
   const GoogleSignUp = () => {
     signUpWithGoogle()
       .then((result) => {
+        console.log("result",result)
         const user = result.user;
-        console.log(user);
+        console.log("user",user);
+        navigate(from, { replace: true });
         alert("Google Sign Up Successful");
         document.getElementById("login").close();
       })
