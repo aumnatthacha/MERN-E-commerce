@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const productRouter = require("./routes/product.routes");
 const swaggerJSDoc = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express");
+
 const swaggerDefinition = {
   openapi: "3.0.0",
   info: {
@@ -43,11 +44,11 @@ const app = express();
 const CLIENT_URL = process.env.CLIENT_URL;
 app.use(cors({ credentials: true, origin: CLIENT_URL }));
 app.use(express.json());
+
 //Databse Connection
 const MONGODB_URL = process.env.MONGODB_URL;
 mongoose.connect(MONGODB_URL);
-app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
-app.get("/", (req, res) => {
+app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));app.get("/", (req, res) => {
   res.send("<h1>This is a RESTful API for SE Shop</h1>");
 });
 
