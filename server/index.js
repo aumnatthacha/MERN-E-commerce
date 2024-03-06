@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const productRouter = require("./routes/product.routes");
 const swaggerJSDoc = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express");
+const cartRouter = require("./routes/cart.routes");
 
 const swaggerDefinition = {
   openapi: "3.0.0",
@@ -54,6 +55,7 @@ app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));app.get("/", (re
 
 //Add Router
 app.use("/products", productRouter);
+app.use("/carts", cartRouter);
 
 //Run Server
 const PORT = process.env.PORT;
