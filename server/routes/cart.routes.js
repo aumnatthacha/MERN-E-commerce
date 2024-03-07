@@ -31,7 +31,7 @@
  *           type: integer
  *           description: The quantity of the Cart
  *       example:
- *         product_id: "12345"
+ *         product_id: "65e8389ff1faf9503ce69893"
  *         name: "Test"
  *         email: "aumnatthacha@gmail.com"
  *         price: 3000
@@ -47,7 +47,7 @@ const cartModel = require("../models/Carts.model");
 
 /**
  * @swagger
- * /Carts:
+ * /carts:
  *   get:
  *     summary: Retrieve a list of products
  *     tags: [Carts]
@@ -153,7 +153,7 @@ router.post("/", async (req, res) => {
 
 /**
  * @swagger
- * /Carts/{id}:
+ * /Carts/clear/{id}:
  *   put:
  *     summary: Update cart by id
  *     tags: [Carts]
@@ -182,7 +182,7 @@ router.post("/", async (req, res) => {
  *       500:
  *         description: Some error happened
  */
-router.put("/:id", async (req, res) => {
+router.put("/clear/:id", async (req, res) => {
   const { id } = req.params;
   try {
     const cart = await cartModel.findByIdAndUpdate(id, req.body, { new: true });
@@ -234,7 +234,7 @@ router.delete("/:id", async (req, res) => {
 
 /**
  * @swagger
- * /Carts/{email}:
+ * /Carts/clear/{email}:
  *   delete:
  *     summary: Delete all carts for a specific email
  *     tags: [Carts]
