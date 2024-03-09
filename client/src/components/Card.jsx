@@ -80,7 +80,7 @@ const Card = ({ item }) => {
         confirmButtonText: "Login Now",
       }).then((result) => {
         if (result.isConfirmed) {
-          navigate("/signin");
+          navigate("/signIn");
         }
       });
     }
