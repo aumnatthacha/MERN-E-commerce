@@ -125,6 +125,24 @@ const ProductList = () => {
             </div>
           </div> */}
           {/** Product Cards */}
+
+          <div className='flex justify-end mb-4 rounded-sm'>
+            <div className='bg-black p-2'>
+              <select
+                id="sort"
+                className='bg-black text-white px-2 rounded-sm'
+                onChange={(e) => handleSortChange(e.target.value, filteredItems)}
+                value={sortOption}
+              >
+                <option value={"default"}>Default</option>
+                <option value={"A-Z"}>A-Z</option>
+                <option value={"Z-A"}>Z-A</option>
+                <option value={"low-to-high"}>Low to high</option>
+                <option value={"high-to-low"}>High to low</option>
+              </select>
+            </div>
+          </div>
+
           <div className='grid md:grid-cols-4 sm:grid-cols-2 grid-cols-1 gap-4'>
             {currentItems.map((item, index) => (
               <Card key={index} item={item} />
