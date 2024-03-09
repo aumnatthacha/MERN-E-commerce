@@ -16,27 +16,21 @@ const Card = ({ item }) => {
     setIsHeartFilled(!isHeartFilled);
   };
 
-  const handleAddProduct = (item) => {
+  const handleAddProduct = () => {
     if (user && user.email) {
       const cartItem = {
-        productId:_id,
+        product_id:"65e0460ebadaf456398293e1",
         name:name,
         email: user.email,
         price:price,
         image:image,
         quantity: 1,
       };
-      Swal.fire({
-        title: "Product added on the cart",
-        position: "center",
-        icon: "success",
-        showConfirmButton: false,
-        timer: "1500",
-      });
+
       console.log(cartItem);
       axios.post("http://localhost:5000/carts", cartItem)
         .then((response) => {
-          if (response.status === 200) {
+          if (response.status === 201) {
             Swal.fire({
               title: "Product added on the cart",
               position: "center",

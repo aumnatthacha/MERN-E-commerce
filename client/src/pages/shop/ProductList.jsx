@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import Card from '../../components/Card';
-
+import axios from "axios";
 const ProductList = () => {
   const [products, setProducts] = useState([]);
   const [filteredItems, setFilteredItems] = useState([]);
@@ -14,8 +14,9 @@ const ProductList = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("/product.json");
-        const data = await response.json();
+       
+        const Product = await axios.get("http://localhost:5000/products")
+        const data = await Product.data;
         setProducts(data);
         setFilteredItems(data);
         setCategories(["all", ...new Set(data.map((item) => item.category))]);
