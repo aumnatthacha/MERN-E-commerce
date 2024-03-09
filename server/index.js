@@ -23,6 +23,12 @@ const swaggerDefinition = {
       url: "https://jsonplaceholder.typicode.com",
     },
   },
+
+  externalDocs: {
+    description: "Download Swagger.json",
+    url: "/swagger.json"
+  },
+
   servers: [
     {
       url: "http://localhost:5000",
@@ -45,6 +51,10 @@ const app = express();
 const CLIENT_URL = process.env.CLIENT_URL;
 app.use(cors({ credentials: true, origin: CLIENT_URL }));
 app.use(express.json());
+app.get("/swagger.json", (req,res)=> {
+  res.header("Content-Type","application/json");
+  res.send(swaggerSpec);
+})
 
 //Databse Connection
 const MONGODB_URL = process.env.MONGODB_URL;

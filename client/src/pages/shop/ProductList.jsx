@@ -108,7 +108,7 @@ const ProductList = () => {
             ))}
           </div>
           {/** Sort Option */}
-          <div className='flex justify-end mb-4 rounded-sm'>
+          {/* <div className='flex justify-end mb-4 rounded-sm'>
             <div className='bg-black p-2'>
               <select
                 id="sort"
@@ -123,7 +123,7 @@ const ProductList = () => {
                 <option value={"high-to-low"}>High to low</option>
               </select>
             </div>
-          </div>
+          </div> */}
           {/** Product Cards */}
           <div className='grid md:grid-cols-4 sm:grid-cols-2 grid-cols-1 gap-4'>
             {currentItems.map((item, index) => (
@@ -131,6 +131,7 @@ const ProductList = () => {
             ))}
           </div>
           {/** Pagination */}
+          
           <div className='flex justify-center mt-4'>
             {Array.from({ length: Math.ceil(filteredItems.length / itemsPerPage), }).map((_, i) => {
               return (
