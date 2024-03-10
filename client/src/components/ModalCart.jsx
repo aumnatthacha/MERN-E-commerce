@@ -14,7 +14,6 @@ const Modal = ({ name, reload, totalQuantity, setTotalQuantity }) => {
   const [randomOneCary, setRandomOneCart] = useState([]);
   const [totalCash, setTotalCash] = useState([]);
 
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -24,22 +23,27 @@ const Modal = ({ name, reload, totalQuantity, setTotalQuantity }) => {
         );
         const data = await response.data;
         setDataCart(data);
-
+  
         const productDataPromises = data.map(async (cartItem) => {
-          const productResponse = await axios.get(
-            `http://localhost:5000/products/${cartItem.product_id}`
-          );
-          return productResponse.data;
+          if (cartItem.product_id) {
+            const Product = await axios.get(
+              `http://localhost:5000/products/${cartItem.product_id}`
+            );
+            return Product.data;
+          }
         });
         const productDataResults = await Promise.all(productDataPromises);
-        setProductData(productDataResults);
-
-        const randomOne = data[0]
+        setProductData(productDataResults.filter(Boolean));
+  
+        const randomOne = data[0];
         setRandomOneCart(randomOne);
-        
-        const totalCashInCart = data.reduce((Bath , item) => Bath + item.price * item.quantity, 0);
+  
+        const totalCashInCart = data.reduce(
+          (Bath, item) => Bath + item.price * item.quantity,
+          0
+        );
         setTotalCash(totalCashInCart);
-        
+  
         if (response.status === 200) {
           setNodata(false);
         }
@@ -48,7 +52,7 @@ const Modal = ({ name, reload, totalQuantity, setTotalQuantity }) => {
       }
     };
     fetchData();
-  }, [user, reload , totalCash]);
+  }, [user, reload, totalCash]);
 
   const closeModal = () => {
     const modal = document.getElementById(name);

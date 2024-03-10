@@ -249,7 +249,7 @@ const Navbar = () => {
           <summary>Category</summary>
           <ul className="p-2">
             <li>
-              <a href="/shops">All</a>
+              <a href="/shop">All</a>
             </li>
             <li>
               <a>Clothing</a>
