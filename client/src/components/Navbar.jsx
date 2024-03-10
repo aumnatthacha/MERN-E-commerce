@@ -225,7 +225,6 @@ const Navbar = () => {
         );
         const data = await response.data;
 
-        // คำนวณผลรวมของ quantity .reduce() เป็นฟังก์ชันที่ใช้ในการลดค่าของอาร์เรย์ไปยังค่าเดียว โดยการใช้ฟังก์ชันที่กำหนดเองเพื่อดำเนินการกับแต่ละสมาชิกของอาร์เรย์และสะสมผลลัพธ์.
         const sumQuantity = data.reduce(
           (total, cartItem) => total + cartItem.quantity,
           0
