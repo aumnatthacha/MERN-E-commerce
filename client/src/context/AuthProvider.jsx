@@ -18,6 +18,7 @@ import {
 const AuthProvider = ({ children }) => {
   const auth = getAuth(app);
   const [user, setUser] = useState(null);
+  const [reload, setReload] = useState(false);
 
   const createUser = (email, password) => {
     return createUserWithEmailAndPassword(auth, email, password);
@@ -52,6 +53,8 @@ const AuthProvider = ({ children }) => {
     logout,
     signUpWithGoogle,
     updateUserProfile,
+    reload,
+    setReload,
   };
   //check if user is Logged in
   useEffect(() => {
