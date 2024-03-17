@@ -1,17 +1,17 @@
-import {createBrowserRouter} from "react-router-dom";
-import Main from '../layout/Main';
+import { createBrowserRouter } from "react-router-dom";
+import Main from "../layout/Main";
 import ProductList from "../pages/shop/ProductList";
 import UpdateProfile from "../pages/dashboard/UpdateProfile";
 import PrivateRouter from "../PrivateRouter/PrivateRouter";
 import Signin from "../components/signIn";
 import Home from "../pages/Home/Home";
+import DashBoard from "../layout/DashBoard";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Main />,
     children: [
-      
       {
         path: "/",
         element: <Home />,
@@ -31,11 +31,13 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path:"/signin",
-    element:<Signin/>
+    path: "/signin",
+    element: <Signin />,
+  },
+  {
+    path: "/admin",
+    element: <DashBoard />
   }
 ]);
 
-
-
-export default router
+export default router;

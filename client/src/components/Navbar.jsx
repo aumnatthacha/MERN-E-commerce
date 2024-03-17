@@ -212,34 +212,45 @@ import Modal from "./Model";
 import ModalCart from "./ModalCart";
 import { AuthContext } from "../context/AuthProvider";
 import axios from "axios";
+import useCart from "../hook/useCart";
 
 const Navbar = () => {
-  const { user, reload, setReload } = useContext(AuthContext);
+  const { user, reload } = useContext(AuthContext);
   const [totalQuantity, setTotalQuantity] = useState(0);
+  const [cart , refetch] = useCart();
+  console.log(cart);
 
   useEffect(() => {
-    setReload(false);
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          `http://localhost:5000/carts/${user.email}`
-        );
-        const data = await response.data;
+    const sumQuantity = cart.reduce(
+      (total, cartItem) => total + cartItem.quantity,
+        0
+      );
+      setTotalQuantity(sumQuantity);
+  },[cart])
 
-        const sumQuantity = data.reduce(
-          (total, cartItem) => total + cartItem.quantity,
-          0
-        );
-        if (response.status === 200) {
-          setTotalQuantity(sumQuantity);
-        }
-      } catch (error) {
-        console.log("No data");
-      }
-    };
+  // useEffect(() => {
+  //   setReload(false);
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await axios.get(
+  //         `http://localhost:5000/carts/${user.email}`
+  //       );
+  //       const data = await response.data;
 
-    fetchData();
-  }, [user, reload]);
+  //       const sumQuantity = data.reduce(
+  //         (total, cartItem) => total + cartItem.quantity,
+  //         0
+  //       );
+  //       if (response.status === 200) {
+  //         setTotalQuantity(sumQuantity);
+  //       }
+  //     } catch (error) {
+  //       console.log("No data");
+  //     }
+  //   };
+
+  //   fetchData();
+  // }, [user, reload]);
   const navItem = (
     <>
       <li>
