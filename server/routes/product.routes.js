@@ -2,10 +2,10 @@
  * @swagger
  * components:
  *  schemas:
- *    Products:
+ *    Product:
  *          type: object
  *          required:
- *            -   name 
+ *            -   name
  *            -   price
  *            -   description
  *            -   image
@@ -35,10 +35,10 @@
  * tags:
  *  name:  Product
  *  description: the products  managing  API
- */
+*/
 const express = require("express");
 const router = express.Router();
-const ProductModel = require("../models/Product.model");
+const ProductModel = require("../models/Product.model")
 
 /**
  * @swagger
@@ -59,14 +59,16 @@ const ProductModel = require("../models/Product.model");
  *         description: Some  error happened
  */
 
-router.get("/", async (req, res) => {
+
+
+router.get("/" , async (req,res) => {
   try {
     const products = await ProductModel.find();
-    res.status(200).json(products);
+        res.status(200).json(products)
   } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-});
+    res.status(500).json({message:error.message})
+  }  
+})
 /**
  * @swagger
  * /products/{id}:
@@ -90,23 +92,24 @@ router.get("/", async (req, res) => {
  *                      items:
  *                            $ref: '#/components/schemas/Product'
  *       404:
- *         description: Product Not Found
+ *         description: Product Not Found  
  *       500:
  *         description: Some  error happened
  */
 
-router.get("/:id", async (req, res) => {
+router.get("/:id", async (req,res) => {
   try {
-    const productId = req.params.id;
-    const products = await ProductModel.findById(productId);
+    const productId = req.params.id
+    const products = await ProductModel.findById(productId)
     if (!products) {
-      return res.status(404).json({ message: "Product Not Found" });
+      return res.status(404).json({message:"Product Not Found"})
     }
-    res.status(200).json(products);
+    res.status(200).json(products)
+
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).json({message:error.message})
   }
-});
+})
 
 /**
  * @swagger
@@ -128,20 +131,20 @@ router.get("/:id", async (req, res) => {
  *                schema:
  *                      $ref: '#/components/schemas/Product'
  *       404:
- *         description: Product Not Found
+ *         description: Product Not Found  
  *       500:
  *         description: Some  error happened
  */
 
-router.post("/", async (req, res) => {
+router.post("/", async (req,res) => {
   const newProduct = new ProductModel(req.body);
   try {
     const product = await newProduct.save();
-    res.status(200).json(product);
+    res.status(200).json(product)
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).json({message:error.message})
   }
-});
+})
 /**
  * @swagger
  * /products/{id}:
@@ -169,27 +172,23 @@ router.post("/", async (req, res) => {
  *                schema:
  *                      $ref: '#/components/schemas/Product'
  *       404:
- *         description: Product Not Found
+ *         description: Product Not Found  
  *       500:
  *         description: Some  error happened
  */
-router.put("/:id", async (req, res) => {
-  const { id } = req.params.id;
-  const newProduct = req.body;
+router.put("/:id" , async (req,res) => {
+  const {id} = req.params.id
+  const newProduct = req.body
   try {
-    const products = await ProductModel.findByIdAndUpdate(
-      req.params.id,
-      req.body,
-      { new: true }
-    );
+    const products = await ProductModel.findByIdAndUpdate(req.params.id , req.body ,{new:true})
     if (!products) {
-      return res.status(404).json({ message: "Product Not Found" });
+      return res.status(404).json({message:"Product Not Found"})
     }
-    res.status(200).json(products);
+    res.status(200).json(products)
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).json({message:error.message})
   }
-});
+})
 
 /**
  * @swagger
@@ -212,21 +211,22 @@ router.put("/:id", async (req, res) => {
  *                schema:
  *                      $ref: '#/components/schemas/Product'
  *       404:
- *         description: Product Not Found
+ *         description: Product Not Found  
  *       500:
  *         description: Some  error happened
  */
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id" , async (req,res) => {
   try {
-    const products = await ProductModel.findByIdAndDelete(req.params.id);
+    const products = await ProductModel.findByIdAndDelete(req.params.id)
     if (!products) {
-      return res.status(404).json({ message: "Product Not Found" });
+      return res.status(404).json({message:"Product Not Found"})
     }
-    res.status(200).json(products);
+    res.status(200).json(products)
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).json({message:error.message})
   }
-});
+})
 
-module.exports = router;
+
+module.exports = router
