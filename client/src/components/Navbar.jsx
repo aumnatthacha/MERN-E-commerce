@@ -211,7 +211,6 @@ import Profile from "./Profile";
 import Modal from "./Model";
 import ModalCart from "./ModalCart";
 import { AuthContext } from "../context/AuthProvider";
-import axios from "axios";
 import useCart from "../hook/useCart";
 
 const Navbar = () => {

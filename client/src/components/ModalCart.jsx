@@ -7,6 +7,7 @@ import { AuthContext } from "../context/AuthProvider";
 import axios from "axios";
 import useCart from "../hook/useCart";
 import Swal from "sweetalert2";
+import axiosPublic from "../hook/useAxios";
 
 const Modal = ({ name, reload, totalQuantity, setTotalQuantity }) => {
   const { user, setReload } = useContext(AuthContext);
@@ -20,20 +21,19 @@ const Modal = ({ name, reload, totalQuantity, setTotalQuantity }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(
+        const response = await axiosPublic.get(
           `http://localhost:5000/carts/${user.email}`,
           {}
         );
         const data = await response.data;
         setDataCart(data);
+        console.log(data );
 
         const productDataPromises = data.map(async (cartItem) => {
-          if (cartItem.product_id) {
-            const Product = await axios.get(
-              `http://localhost:5000/products/${cartItem.product_id}`
-            );
-            return Product.data;
-          }
+          const Product = await axiosPublic.get(
+            `http://localhost:5000/products/${cartItem.product_id}`
+          );
+          return Product.data;
         });
         const productDataResults = await Promise.all(productDataPromises);
         setProductData(productDataResults.filter(Boolean));
@@ -55,7 +55,7 @@ const Modal = ({ name, reload, totalQuantity, setTotalQuantity }) => {
       }
     };
     fetchData();
-  }, [user, cart, reload, totalCash]);
+  }, [user, cart, nodata, totalCash]);
 
   const closeModal = () => {
     const modal = document.getElementById(name);
@@ -72,7 +72,7 @@ const Modal = ({ name, reload, totalQuantity, setTotalQuantity }) => {
       quantity: 1,
     };
     try {
-      await axios.post(`http://localhost:5000/carts`, cartObjects);
+      await axiosPublic.post(`http://localhost:5000/carts`, cartObjects);
       setReload(true);
     } catch (error) {
       console.log(error);
@@ -91,11 +91,11 @@ const Modal = ({ name, reload, totalQuantity, setTotalQuantity }) => {
     };
     try {
       if (cartItem.quantity !== 1) {
-        await axios.put(
+        await axiosPublic.put(
           `http://localhost:5000/carts/${cartItem._id}`,
           cartObjects
         );
-        setReload(true);
+        refetch();
       } else {
         console.log("Cannot DecreaseQuantity");
       }
@@ -121,12 +121,13 @@ const Modal = ({ name, reload, totalQuantity, setTotalQuantity }) => {
       });
 
       if (result.isConfirmed) {
-        await axios.delete(`http://localhost:5000/carts/${cartItem._id}`);
+        await axiosPublic.delete(`http://localhost:5000/carts/${cartItem._id}`);
         const total = totalQuantity - cartItem.quantity;
         setTotalQuantity(total);
         refetch();
-        Swal.fire("Deleted!", "รายการถูกลบเรียบร้อย", "success");
+        await Swal.fire("Deleted!", "รายการถูกลบเรียบร้อย", "success");
       }
+      modal.showModal();
     } catch (error) {
       console.log(error);
       Swal.fire("Error", "เกิดข้อผิดพลาดในการลบ", "error");
@@ -134,11 +135,37 @@ const Modal = ({ name, reload, totalQuantity, setTotalQuantity }) => {
   };
 
   const handleClearAll = async (user) => {
+    const modal = document.getElementById(name);
+    modal.close();
     try {
-      await axios.delete(`http://localhost:5000/carts/clear/${user.email}`);
-      setTotalQuantity(0);
-      setReload(true);
-      refetch();
+      const confirmation = await Swal.fire({
+        title: "ยืนยันการลบทั้งหมด",
+        text: "คุณแน่ใจหรือไม่ที่ต้องการลบทั้งหมด?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "ใช่, ลบทั้งหมด",
+        cancelButtonText: "ยกเลิก",
+      });
+
+      if (confirmation.isConfirmed) {
+        // ทำการลบทั้งหมดจากเซิร์ฟเวอร์
+        await axiosPublic.delete(
+          `http://localhost:5000/carts/clear/${user.email}`
+        );
+        // ปรับปรุงสถานะในแอพพลิเคชั่น
+        setTotalQuantity(0);
+        setNodata(true);
+        refetch();
+        // แสดง Swal เพื่อแจ้งให้ทราบว่าลบทั้งหมดเรียบร้อยแล้ว
+        await Swal.fire(
+          "ลบเรียบร้อย!",
+          "ทั้งหมดถูกลบออกจากตะกร้าแล้ว",
+          "success"
+        );
+        modal.showModal();
+      }
     } catch (error) {
       console.log(error);
     }
