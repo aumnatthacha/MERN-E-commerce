@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import Card from '../../components/Card';
 import axios from "axios";
-
+import axiosPublic from "../../hook/useAxios";
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
@@ -17,7 +17,7 @@ const ProductList = () => {
     const fetchData = async () => {
       try {
        
-        const Product = await axios.get("http://localhost:5000/products")
+        const Product = await axiosPublic.get("http://localhost:5000/products")
         const data = await Product.data;
         setProducts(data);
         setFilteredItems(data);
@@ -70,6 +70,7 @@ const ProductList = () => {
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = filteredItems.slice(indexOfFirstItem, indexOfLastItem);
+
 
   return (
     <div>

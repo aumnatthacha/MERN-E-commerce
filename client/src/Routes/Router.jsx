@@ -3,9 +3,11 @@ import Main from "../layout/Main";
 import ProductList from "../pages/shop/ProductList";
 import UpdateProfile from "../pages/dashboard/UpdateProfile";
 import PrivateRouter from "../PrivateRouter/PrivateRouter";
-import Signin from "../components/signIn";
+import Signin from "../components/Signin";
 import Home from "../pages/Home/Home";
 import DashBoard from "../layout/DashBoard";
+import AdminRouter from "../PrivateRouter/AdminRouter";
+
 
 const router = createBrowserRouter([
   {
@@ -35,8 +37,12 @@ const router = createBrowserRouter([
     element: <Signin />,
   },
   {
-    path: "/admin",
-    element: <DashBoard />
+    path: "/dashboard",
+    element: (
+      <AdminRouter>
+      <DashBoard />
+    </AdminRouter>
+    )
   }
 ]);
 

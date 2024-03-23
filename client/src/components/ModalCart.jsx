@@ -1,13 +1,10 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable no-unused-vars */
 import React, { useContext, useState, useEffect } from "react";
 import { AiOutlineClose, AiOutlineDelete } from "react-icons/ai";
 import { FiPlus, FiMinus } from "react-icons/fi";
 import { AuthContext } from "../context/AuthProvider";
-import axios from "axios";
+import axiosPublic from "../hook/useAxios";
 import useCart from "../hook/useCart";
 import Swal from "sweetalert2";
-import axiosPublic from "../hook/useAxios";
 
 const Modal = ({ name, reload, totalQuantity, setTotalQuantity }) => {
   const { user, setReload } = useContext(AuthContext);
@@ -27,16 +24,15 @@ const Modal = ({ name, reload, totalQuantity, setTotalQuantity }) => {
         );
         const data = await response.data;
         setDataCart(data);
-        console.log(data );
 
         const productDataPromises = data.map(async (cartItem) => {
-          const Product = await axiosPublic.get(
+          const productResponse = await axiosPublic.get(
             `http://localhost:5000/products/${cartItem.product_id}`
           );
-          return Product.data;
+          return productResponse.data;
         });
         const productDataResults = await Promise.all(productDataPromises);
-        setProductData(productDataResults.filter(Boolean));
+        setProductData(productDataResults);
 
         const randomOne = data[0];
         setRandomOneCart(randomOne);
@@ -55,7 +51,7 @@ const Modal = ({ name, reload, totalQuantity, setTotalQuantity }) => {
       }
     };
     fetchData();
-  }, [user, cart, nodata, totalCash]);
+  }, [user, cart, totalCash, nodata]);
 
   const closeModal = () => {
     const modal = document.getElementById(name);
@@ -73,7 +69,7 @@ const Modal = ({ name, reload, totalQuantity, setTotalQuantity }) => {
     };
     try {
       await axiosPublic.post(`http://localhost:5000/carts`, cartObjects);
-      setReload(true);
+      refetch();
     } catch (error) {
       console.log(error);
     }
@@ -121,6 +117,7 @@ const Modal = ({ name, reload, totalQuantity, setTotalQuantity }) => {
       });
 
       if (result.isConfirmed) {
+        // ผู้ใช้กดยืนยันการลบ
         await axiosPublic.delete(`http://localhost:5000/carts/${cartItem._id}`);
         const total = totalQuantity - cartItem.quantity;
         setTotalQuantity(total);
@@ -138,6 +135,7 @@ const Modal = ({ name, reload, totalQuantity, setTotalQuantity }) => {
     const modal = document.getElementById(name);
     modal.close();
     try {
+      // แสดง Swal เพื่อขอยืนยันการลบทั้งหมด
       const confirmation = await Swal.fire({
         title: "ยืนยันการลบทั้งหมด",
         text: "คุณแน่ใจหรือไม่ที่ต้องการลบทั้งหมด?",
@@ -149,6 +147,7 @@ const Modal = ({ name, reload, totalQuantity, setTotalQuantity }) => {
         cancelButtonText: "ยกเลิก",
       });
 
+      // ถ้าผู้ใช้ยืนยันการลบทั้งหมด
       if (confirmation.isConfirmed) {
         // ทำการลบทั้งหมดจากเซิร์ฟเวอร์
         await axiosPublic.delete(
@@ -177,7 +176,6 @@ const Modal = ({ name, reload, totalQuantity, setTotalQuantity }) => {
         <button className="close-button self-end mr-4" onClick={closeModal}>
           <AiOutlineClose />
         </button>
-
         {/* เนื้อหา Modal */}
         {nodata ? (
           <div className="items-center justify-center ml-auto mr-auto mt-[100px] mb-[100px]">
@@ -230,7 +228,6 @@ const Modal = ({ name, reload, totalQuantity, setTotalQuantity }) => {
                 </button>
               </div>
             ))}
-
             {/* ข้อมูลรายละเอียดเพิ่มเติม */}
             <div className="flex p-4 items-center">
               <p>Name : {randomOneCary.name}</p>
@@ -243,11 +240,10 @@ const Modal = ({ name, reload, totalQuantity, setTotalQuantity }) => {
             <div className="flex p-4 items-center">
               <p>PhoneNumber : 086-251-0754</p>
             </div>
-
             {/* ปุ่ม Clear All และ Buy Now */}
             <div className="flex">
               <button
-                className="bg-red text-white px-6 py-2 rounded-lg ml-2 "
+                className="bg-red text-white px-4 py-2 rounded ml-auto"
                 onClick={() => handleClearAll(user)}
               >
                 Clear All
