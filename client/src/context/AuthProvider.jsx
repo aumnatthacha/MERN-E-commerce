@@ -61,19 +61,23 @@ const AuthProvider = ({ children }) => {
   //check if user is Logged in
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
       if (currentUser) {
         const userInfo = {email : currentUser.email}
         try {
           axiosPublic.post("/jwt", userInfo)
-          .then((response) => {   
-            console.log(response.data);
-        
+          .then((response) => {  
             if(response.data.token){
               localStorage.setItem("token", response.data.token);
             } else {
               localStorage.removeItem("token");
-            }
+            } 
+            axiosPublic.get(`/users/${currentUser.email}`).then(
+              (
+                response
+              ) => {
+               setUser(response.data)
+              }
+            )
           })
           .catch((error) => {
             console.error('Error:', error);
@@ -81,7 +85,6 @@ const AuthProvider = ({ children }) => {
         } catch (error) {
           console.log(error);
         }
-        setUser(currentUser);
       }
     });
     return () => {

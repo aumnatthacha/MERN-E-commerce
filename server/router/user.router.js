@@ -13,10 +13,10 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/:id", async (req, res) => {
+router.get("/:email", async (req, res) => {
   try {
-    const id = req.params.id;
-    const userData = await UserModel.findById(id);
+    const userEmail = req.params.email;
+    const userData = await UserModel.findOne({email:userEmail});
     if (!userData) {
       return res.status(404).json({ message: "userData Not Found" });
     }

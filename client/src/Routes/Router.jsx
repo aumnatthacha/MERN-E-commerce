@@ -7,6 +7,8 @@ import Signin from "../components/Signin";
 import Home from "../pages/Home/Home";
 import DashBoard from "../layout/DashBoard";
 import AdminRouter from "../PrivateRouter/AdminRouter";
+import UserList from "../components/Admin/UserList";
+
 
 
 const router = createBrowserRouter([
@@ -40,9 +42,15 @@ const router = createBrowserRouter([
     path: "/dashboard",
     element: (
       <AdminRouter>
-      <DashBoard />
-    </AdminRouter>
-    )
+      <DashBoard/>  
+      </AdminRouter>
+    ),
+      children : [
+        {
+          path: "/dashboard/users",
+          element: <UserList />,
+        },
+      ]
   }
 ]);
 

@@ -32,7 +32,8 @@ const AdminRouter = ({ children }) => {
     return <div className="loading-animation">Loading...</div>;
   }
 
-  if (user) {
+  console.log(user)
+  if (user && user.role === "admin") {
     return children;
   } else {
     return <Navigate to="/signIn" state={{ from: location }} replace />;
