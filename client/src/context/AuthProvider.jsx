@@ -89,7 +89,6 @@ const AuthProvider = ({ children }) => {
     };
   }, [axiosPublic]);
 
-
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
   );

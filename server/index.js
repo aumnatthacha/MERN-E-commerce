@@ -2,10 +2,12 @@ const express = require("express");
 const dotenv = require("dotenv");
 const cors = require("cors");
 const mongoose = require("mongoose");
-const productRouter = require("./routes/product.routes");
+const productRouter = require("./router/product.router");
 const swaggerJSDoc = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express");
-const cartRouter = require("./routes/cart.routes");
+const cartRouter = require("./router/cart.router");
+const UserRouter = require("./router/user.router")
+const jwt = require('jsonwebtoken')
 
 const swaggerDefinition = {
   openapi: "3.0.0",
@@ -66,6 +68,13 @@ app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));app.get("/", (re
 //Add Router
 app.use("/products", productRouter);
 app.use("/carts", cartRouter);
+app.use("/users", UserRouter)
+
+app.post("/jwt" , async (req,res) => {
+  const user = req.body;
+  const token = jwt.sign(user, process.env.SECRET, { expiresIn: '1h' });
+  res.json({ token });
+});
 
 //Run Server
 const PORT = process.env.PORT;
