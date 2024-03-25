@@ -17,7 +17,7 @@ const AdminRouter = ({ children }) => {
 
     return () => clearTimeout(waitBeforeRedirect);
   }, []);
-  
+
   useEffect(() => {
     if (user === null) {
       console.log("Waiting for user...");
@@ -32,7 +32,7 @@ const AdminRouter = ({ children }) => {
     return <div className="loading-animation">Loading...</div>;
   }
 
-  console.log(user)
+  console.log(user);
   if (user && user.role === "admin") {
     return children;
   } else {

@@ -63,84 +63,74 @@ const UserList = () => {
     });
   };
   return (
-    <div>
-      <div className=" flex justify-between mx-4 my-4">
-        <h2 className=" text-2xl"> All users</h2>
-        <h2 className=" text-2xl"> {users.length}</h2>
+    <div className="flex flex-col">
+      <div className="flex justify-between mx-2 my-2">
+        <h2 className="text-2xl">All users</h2>
+        <h2 className="text-2xl">{users.length}</h2>
       </div>
-      <div>
-        <div className="overflow-x-auto">
-          <table className="table table-zebra md:w-[870px]">
-            {/* head */}
-            <thead className="bg-red text-white text-center">
-              <tr>
-                <th>
-                  <label>#</label>
-                </th>
-                <th>Name</th>
-                <th>Job</th>
-                <th>Favorite Color</th>
-                <th> Action</th>
-              </tr>
-            </thead>
-
-            <tbody className=" text-center">
-              {/* row 1 */}
-
-              {users.map((user, index) => (
-                <tr key={index}>
-                  <th>
-                    <label>{index + 1}</label>
-                  </th>
-                  <td>
-                    <div className="flex items-center gap-3">
-                      <div className="avatar">
-                        <div className="mask mask-squircle w-12 h-12">
-                          <img
-                            src={user.photo}
-                            alt="Avatar Tailwind CSS Component"
-                          />
-                        </div>
-                      </div>
-                      <div>
-                        <div className="font-bold">{user.name}</div>
-                      </div>
+      <div className="overflow-x-auto">
+        <table className="min-w-full divide-y divide-gray-200">
+          <thead className="bg-red text-white text-center">
+            <tr>
+              <th className="px-4 py-2">#</th>
+              <th className="px-4 py-2">Name</th>
+              <th className="px-4 py-2">Job</th>
+              <th className="px-4 py-2">Favorite Color</th>
+              <th className="px-4 py-2">Action</th>
+            </tr>
+          </thead>
+          <tbody className="text-center divide-y divide-gray-200">
+            {users.map((user, index) => (
+              <tr
+                key={index}
+                className={index % 2 === 0 ? "bg-gray-50" : "bg-white"}
+              >
+                <td className="px-6 py-4 whitespace-nowrap">{index + 1}</td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  <div className="flex items-center">
+                    <div className="w-10 h-10">
+                      <img
+                        className="w-full h-full rounded-full"
+                        src={user.photo}
+                        alt="Avatar"
+                      />
                     </div>
-                  </td>
-                  <td>{user.email}</td>
-                  <td className="">
-                    User
+                    <div className="ml-4">{user.name}</div>
+                  </div>
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">{user.email}</td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  <label className="inline-flex items-center">
                     <input
                       type="checkbox"
-                      className="toggle"
-                      onClick={() => handleCheckRole(user)}
+                      className="form-checkbox h-5 w-5 text-red-600"
                       checked={user.role === "admin"}
+                      onChange={() => handleCheckRole(user)}
                     />
-                    Admin
-                  </td>
-                  <th>
-                    <button
-                      className="btn btn-ghost btn-xs"
-                      onClick={() => handleDeleteUser(user)}
-                    >
-                      <FaTrash />
-                    </button>
-                  </th>
-                </tr>
-              ))}
-            </tbody>
-            {/* foot */}
-            <tfoot className="bg-red text-white text-center">
-              <tr>
-                <th></th>
-                <th>Name</th>
-                <th>Job</th>
-                <th>Favorite Color</th>
-                <th></th>
+                    <span className="ml-2">Admin</span>
+                  </label>
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  <button
+                    className="text-red-600 hover:text-red-900"
+                    onClick={() => handleDeleteUser(user)}
+                  >
+                    <FaTrash />
+                  </button>
+                </td>
               </tr>
-            </tfoot>
-          </table>
-        </div>
+            ))}
+          </tbody>
+          <tfoot className="bg-red text-white text-center">
+            <tr>
+              <th className="px-6 py-3"></th>
+              <th className="px-6 py-3">Name</th>
+              <th className="px-6 py-3">Job</th>
+              <th className="px-6 py-3">Favorite Color</th>
+              <th className="px-6 py-3"></th>
+            </tr>
+          </tfoot>
+        </table>
       </div>
     </div>
   );
