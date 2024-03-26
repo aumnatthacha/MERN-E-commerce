@@ -53,12 +53,16 @@ const Dialog = () => {
                   <li>
                     <a>Manage Orders</a>
                   </li>
-                  <li>
-                    <a href="/addProduct">Add Product</a>
-                  </li>
-                  <li>
-                    <a>Manage Item</a>
-                  </li>
+                  <Link to={"/shop/createProduct"}>
+                    <li>
+                      <a>Add Product</a>
+                    </li>
+                  </Link>
+                  <Link to={"/dashboard/listProduct"}>
+                    <li>
+                      <a>Manage Item</a>
+                    </li>
+                  </Link>
                   <Link to={"/dashboard/users"}>
                     <li>
                       <a>All Users</a>

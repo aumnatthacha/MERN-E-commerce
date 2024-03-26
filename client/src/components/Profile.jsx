@@ -4,10 +4,12 @@
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthProvider";
 import { useNavigate } from "react-router-dom";
+import useAdmin from "../hook/useAdmin";
 
 const Profile = ({ user }) => {
   const { logout } = useContext(AuthContext);
   const navigate = useNavigate();
+  const [isAdmin , isAdminLoading] = useAdmin()
   
     const handleOutOut = () => {
       logout()

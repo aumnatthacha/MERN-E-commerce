@@ -8,8 +8,9 @@ import Home from "../pages/Home/Home";
 import DashBoard from "../layout/DashBoard";
 import AdminRouter from "../PrivateRouter/AdminRouter";
 import UserList from "../components/Admin/UserList";
-
-
+import CreateProducts from "../components/Admin/AddProducts";
+import UpdateProducts from "../components/Admin/ManageProduct";
+import UpdateProductById from "../components/Admin/UpdateProduct";
 
 const router = createBrowserRouter([
   {
@@ -42,16 +43,28 @@ const router = createBrowserRouter([
     path: "/dashboard",
     element: (
       <AdminRouter>
-      <DashBoard/>  
+        <DashBoard />
       </AdminRouter>
     ),
-      children : [
-        {
-          path: "/dashboard/users",
-          element: <UserList />,
-        },
-      ]
-  }
+    children: [
+      {
+        path: "/dashboard/users",
+        element: <UserList />,
+      },
+      {
+        path: "/dashboard/createProduct",
+        element: <CreateProducts />,
+      },
+      {
+        path: "/dashboard/listProduct",
+        element: <UpdateProducts />,
+      },
+      {
+        path: "/dashboard/update/:id",
+        element: <UpdateProductById />,
+      },
+    ],
+  },
 ]);
 
 export default router;

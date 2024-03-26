@@ -72,11 +72,11 @@ const UserList = () => {
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-red text-white text-center">
             <tr>
-              <th className="px-4 py-2">#</th>
-              <th className="px-4 py-2">Name</th>
-              <th className="px-4 py-2">Job</th>
-              <th className="px-4 py-2">Favorite Color</th>
-              <th className="px-4 py-2">Action</th>
+              <th className="px-6 py-3">#</th>
+              <th className="px-6 py-3">Name</th>
+              <th className="px-6 py-3">Job</th>
+              <th className="px-6 py-3">Favorite Color</th>
+              <th className="px-6 py-3">Action</th>
             </tr>
           </thead>
           <tbody className="text-center divide-y divide-gray-200">
@@ -121,15 +121,6 @@ const UserList = () => {
               </tr>
             ))}
           </tbody>
-          <tfoot className="bg-red text-white text-center">
-            <tr>
-              <th className="px-6 py-3"></th>
-              <th className="px-6 py-3">Name</th>
-              <th className="px-6 py-3">Job</th>
-              <th className="px-6 py-3">Favorite Color</th>
-              <th className="px-6 py-3"></th>
-            </tr>
-          </tfoot>
         </table>
       </div>
     </div>
