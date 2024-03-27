@@ -88,9 +88,11 @@ const UpdateProduct = () => {
                 <option value="" disabled selected hidden>
                   Select your type product
                 </option>
-                <option value="Electronic">Electronic</option>
-                <option value="Gaming Gear">Gaming Gear</option>
-                <option value="Toy">Toy</option>
+                <option value="UX/UI UX Design">UX/UI UX Design</option>
+                <option value="Front-End Developer">Front-End Developer</option>
+                <option value="Back-end developers">Back-end developers</option>
+                <option value="full-stack developer">Full-stack developer</option>
+                <option value="Business Analysis">Business Analysis</option>
               </select>
             </div>
             <div className="ml-2 w-full">

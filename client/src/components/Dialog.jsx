@@ -47,13 +47,15 @@ const Dialog = () => {
                   </div>
                   {/* Sidebar content here */}
                   <hr className="h-px my-4 bg-gray-100 border-0 dark:bg-gray-300"></hr>
-                  <li className="border-0">
-                    <a>Dashboard</a>
-                  </li>
+                  <Link to={"/dashboard"}>
+                    <li className="border-0">
+                      <a>Dashboard</a>
+                    </li>
+                  </Link>
                   <li>
                     <a>Manage Orders</a>
                   </li>
-                  <Link to={"/shop/createProduct"}>
+                  <Link to={"/dashboard/createProduct"}>
                     <li>
                       <a>Add Product</a>
                     </li>
@@ -70,12 +72,17 @@ const Dialog = () => {
                   </Link>
 
                   <hr className="h-px my-4 bg-gray-100 border-0 dark:bg-gray-300"></hr>
-                  <li>
-                    <a>Home</a>
-                  </li>
-                  <li>
-                    <a>Product</a>
-                  </li>
+                  <Link to={"/"}>
+                    <li>
+                      <a>Home</a>
+                    </li>
+                  </Link>
+                  <Link to={"/shop"}>
+                    <li>
+                      <a>Product</a>
+                    </li>
+                  </Link>
+
                   <li>
                     <a>Order Tracking</a>
                   </li>

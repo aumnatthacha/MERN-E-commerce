@@ -32,30 +32,32 @@ const UpdateProfile = () => {
   };
 
   return (
-    <div className="max-w-md bg-white shadow w-full mx-auto flex items-center justify-center my-20">
-      <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-        <h3 className="font-bold text-lg mt-3">Update Your ProFile</h3>
-        <form className="card-body" onSubmit={handleSubmit(onSubmit)}>
-          <div className="form-control">
+    <div className="flex items-center justify-center my-20">
+      <div className="card transform-gpu w-full max-w-sm shadow-2xl bg-gray-100 rounded-lg">
+        <h3 className="font-bold text-lg mt-3 text-center">
+          Update Your Profile
+        </h3>
+        <form className="card-body px-4 py-6" onSubmit={handleSubmit(onSubmit)}>
+          <div className="form-control mb-4">
             <label className="label">
               <span className="label-text">Name</span>
             </label>
             <input
               type="name"
-              placeholder="name"
-              className="input input-bordered"
+              placeholder="Your name"
+              className="input input-bordered w-full"
               required
               {...register("name")}
             />
           </div>
-          <div className="form-control">
+          <div className="form-control mb-4">
             <label className="label">
-              <span className="label-text">Upload ProFile Photo</span>
+              <span className="label-text">Upload Profile Photo</span>
             </label>
             <input
               type="text"
               placeholder="Photo URL"
-              className="input input-bordered"
+              className="input input-bordered w-full"
               required
               {...register("PhotoURL")}
             />
@@ -64,7 +66,7 @@ const UpdateProfile = () => {
             <input
               type="submit"
               value="Update"
-              className="btn bg-red-700 text-white"
+              className="text-white bg-red btn w-full hover:bg-rose-950"
             />
           </div>
         </form>
