@@ -5,59 +5,59 @@ import { Link } from "react-router-dom";
 import { FaTrash } from "react-icons/fa";
 
 
-const ProductListUpdate = () => {
-  const axiosSecure = useAxiosSecure();
-  const [product, setProduct] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(10);
+  const ProductListUpdate = () => {
+    const axiosSecure = useAxiosSecure();
+    const [product, setProduct] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [itemsPerPage, setItemsPerPage] = useState(10);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await axiosSecure.get(`/products`);
-        setProduct(res.data);
-      } catch (error) {
-        console.error("Error fetching users:", error);
-      }
-    };
-
-    fetchData();
-  }, [product]);
-
-  const indexOfFirstItem = (currentPage - 1) * itemsPerPage;
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const currentItems = product.slice(indexOfFirstItem, indexOfLastItem);
-
-  const handleDeleteUser = (products) => {
-    Swal.fire({
-      title: "Are you Sure",
-      text: "You want to delete this " + `${products.name}` + "?",
-      icon: "warning",
-      showCancelButton: true,
-      showConfirmButton: true,
-      confirmButtonText: "Delete",
-    }).then((result) => {
-      if (result.isConfirmed) {
+    useEffect(() => {
+      const fetchData = async () => { 
         try {
-          axiosSecure.delete(`/products/${products._id}`).then((res) => {
-            if (res.status === 200) {
-              Swal.fire({
-                title: "Deleted!",
-                text: `${res.data.name} has deleted!`,
-                icon: "success",
-              });
-            }
-          });
+          const res = await axiosSecure.get(`/products`);
+          setProduct(res.data);
         } catch (error) {
-          Swal.fire({
-            title: "Deleted!",
-            text: `${error} can't deleted!`,
-            icon: "error",
-          });
+          console.error("Error fetching users:", error);
         }
-      }
-    });
-  };
+      };
+
+      fetchData();
+    }, [product]);
+
+    const indexOfFirstItem = (currentPage - 1) * itemsPerPage;
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const currentItems = product.slice(indexOfFirstItem, indexOfLastItem);
+
+    const handleDeleteUser = (products) => {
+      Swal.fire({
+        title: "Are you Sure",
+        text: "You want to delete this " + `${products.name}` + "?",
+        icon: "warning",
+        showCancelButton: true,
+        showConfirmButton: true,
+        confirmButtonText: "Delete",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          try {
+            axiosSecure.delete(`/products/${products._id}`).then((res) => {
+              if (res.status === 200) {
+                Swal.fire({
+                  title: "Deleted!",
+                  text: `${res.data.name} has deleted!`,
+                  icon: "success",
+                });
+              }
+            });
+          } catch (error) {
+            Swal.fire({
+              title: "Deleted!",
+              text: `${error} can't deleted!`,
+              icon: "error",
+            });
+          }
+        }
+      });
+    };
 
   return (
     <div className="flex flex-col">

@@ -9,7 +9,7 @@ import DashBoard from "../layout/DashBoard";
 import AdminRouter from "../PrivateRouter/AdminRouter";
 import UserList from "../components/Admin/UserList";
 import CreateProducts from "../components/Admin/AddProducts";
-import UpdateProducts from "../components/Admin/ManageProduct";
+import UpdateProducts from "../components/Admin/ProductListUpdate";
 import UpdateProductById from "../components/Admin/UpdateProduct";
 
 const router = createBrowserRouter([

@@ -91,7 +91,9 @@ const UpdateProduct = () => {
                 <option value="UX/UI UX Design">UX/UI UX Design</option>
                 <option value="Front-End Developer">Front-End Developer</option>
                 <option value="Back-end developers">Back-end developers</option>
-                <option value="full-stack developer">Full-stack developer</option>
+                <option value="full-stack developer">
+                  Full-stack developer
+                </option>
                 <option value="Business Analysis">Business Analysis</option>
               </select>
             </div>
