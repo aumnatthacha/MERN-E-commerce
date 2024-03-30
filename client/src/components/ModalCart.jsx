@@ -23,7 +23,7 @@ const Modal = ({ name, reload, totalQuantity, setTotalQuantity }) => {
         );
         const data = await response.data;
         setDataCart(data);
-  
+
         const productDataPromises = data.map(async (cartItem) => {
           if (cartItem.product_id) {
             const Product = await axios.get(
@@ -34,16 +34,16 @@ const Modal = ({ name, reload, totalQuantity, setTotalQuantity }) => {
         });
         const productDataResults = await Promise.all(productDataPromises);
         setProductData(productDataResults.filter(Boolean));
-  
+
         const randomOne = data[0];
         setRandomOneCart(randomOne);
-  
+
         const totalCashInCart = data.reduce(
           (Bath, item) => Bath + item.price * item.quantity,
           0
         );
         setTotalCash(totalCashInCart);
-  
+
         if (response.status === 200) {
           setNodata(false);
         }
@@ -60,6 +60,10 @@ const Modal = ({ name, reload, totalQuantity, setTotalQuantity }) => {
   };
 
   const handleIncreaseQuantity = async (cartItem) => {
+    if (!cartItem || !cartItem._id) {
+      console.log("Error: cartItem or _id is null");
+      return;
+    }
     const cartObjects = {
       product_id: cartItem.product_id,
       email: cartItem.email,
@@ -77,6 +81,10 @@ const Modal = ({ name, reload, totalQuantity, setTotalQuantity }) => {
   };
 
   const handleDecreaseQuantity = async (cartItem) => {
+    if (!cartItem || !cartItem._id) {
+      console.log("Cart item or _id is null");
+      return;
+    }
     const DecreaseQuantity = cartItem.quantity - 1;
     const cartObjects = {
       product_id: cartItem.product_id,
@@ -124,90 +132,93 @@ const Modal = ({ name, reload, totalQuantity, setTotalQuantity }) => {
 
   return (
     <dialog id={name} className="modal">
-  <div className="modal-box flex flex-col">
-    <button className="close-button self-end mr-4" onClick={closeModal}>
-      <AiOutlineClose />
-    </button>
+      <div className="modal-box flex flex-col">
+        <button className="close-button self-end mr-4" onClick={closeModal}>
+          <AiOutlineClose />
+        </button>
 
-    {/* เนื้อหา Modal */}
-    {nodata ? (
-      <div className="items-center justify-center ml-auto mr-auto mt-[100px] mb-[100px]">
-        <h1>No product in carts</h1>
-      </div>
-    ) : (
-      <>
-        {dataCart.map((cartItem, index) => (
-          <div key={index} className="modal-content flex p-4 items-center">
-            {/* รูปสินค้า */}
-            <img src={cartItem.image} alt="Product" className="w-12 h-12 mr-4" />
-
-            {/* ชื่อสินค้า */}
-            <div>
-              <p className="text-sm font-semibold">
-                {productData[index]?.name}
-              </p>
-              <p className="text-gray-500">
-                {productData[index]?.description}
-              </p>
-            </div>
-
-            {/* จำนวนสินค้า */}
-            <div className="flex items-center ml-auto">
-              <button
-                className="quantity-button"
-                onClick={() => handleDecreaseQuantity(cartItem)}
-              >
-                <FiMinus />
-              </button>
-              <span className="mx-2">{cartItem.quantity}</span>
-              <button
-                className="quantity-button"
-                onClick={() => handleIncreaseQuantity(cartItem)}
-              >
-                <FiPlus />
-              </button>
-            </div>
-
-            {/* ถังขยะ */}
-            <button
-              className="delete-button ml-[30px]"
-              onClick={() => handleDelete(cartItem)}
-            >
-              <AiOutlineDelete />
-            </button>
+        {/* เนื้อหา Modal */}
+        {nodata ? (
+          <div className="items-center justify-center ml-auto mr-auto mt-[100px] mb-[100px]">
+            <h1>No product in carts</h1>
           </div>
-        ))}
+        ) : (
+          <>
+            {dataCart.map((cartItem, index) => (
+              <div key={index} className="modal-content flex p-4 items-center">
+                {/* รูปสินค้า */}
+                <img
+                  src={cartItem.image}
+                  alt="Product"
+                  className="w-12 h-12 mr-4"
+                />
 
-        {/* ข้อมูลรายละเอียดเพิ่มเติม */}
-        <div className="flex p-4 items-center">
-          <p>Name : {randomOneCary.name}</p>
-          <p className="ml-auto">{totalQuantity} รายการ</p>
-        </div>
-        <div className="flex p-4 items-center">
-          <p>Email : {randomOneCary.email}</p>
-          <p className="ml-auto">รวม {totalCash} บาท</p>
-        </div>
-        <div className="flex p-4 items-center">
-          <p>PhoneNumber : 086-251-0754</p>
-        </div>
+                {/* ชื่อสินค้า */}
+                <div>
+                  <p className="text-sm font-semibold">
+                    {productData[index]?.name}
+                  </p>
+                  <p className="text-gray-500">
+                    {productData[index]?.description}
+                  </p>
+                </div>
 
-        {/* ปุ่ม Clear All และ Buy Now */}
-        <div className="flex">
-          <button
-            className="bg-red text-white px-6 py-2 rounded-lg ml-2 "
-            onClick={() => handleClearAll(user)}
-          >
-            Clear All
-          </button>
-          <button className="bg-blue text-white px-4 py-2 rounded ml-[10px]">
-            Buy Now
-          </button>
-        </div>
-      </>
-    )}
-  </div>
-</dialog>
+                {/* จำนวนสินค้า */}
+                <div className="flex items-center ml-auto">
+                  <button
+                    className="quantity-button"
+                    onClick={() => handleDecreaseQuantity(cartItem)}
+                  >
+                    <FiMinus />
+                  </button>
+                  <span className="mx-2">{cartItem.quantity}</span>
+                  <button
+                    className="quantity-button"
+                    onClick={() => handleIncreaseQuantity(cartItem)}
+                  >
+                    <FiPlus />
+                  </button>
+                </div>
 
+                {/* ถังขยะ */}
+                <button
+                  className="delete-button ml-[30px]"
+                  onClick={() => handleDelete(cartItem)}
+                >
+                  <AiOutlineDelete />
+                </button>
+              </div>
+            ))}
+
+            {/* ข้อมูลรายละเอียดเพิ่มเติม */}
+            <div className="flex p-4 items-center">
+              <p>Name : {randomOneCary.name}</p>
+              <p className="ml-auto">{totalQuantity} รายการ</p>
+            </div>
+            <div className="flex p-4 items-center">
+              <p>Email : {randomOneCary.email}</p>
+              <p className="ml-auto">รวม {totalCash} บาท</p>
+            </div>
+            <div className="flex p-4 items-center">
+              <p>PhoneNumber : 086-251-0754</p>
+            </div>
+
+            {/* ปุ่ม Clear All และ Buy Now */}
+            <div className="flex">
+              <button
+                className="bg-red text-white px-6 py-2 rounded-lg ml-2 "
+                onClick={() => handleClearAll(user)}
+              >
+                Clear All
+              </button>
+              <button className="bg-blue text-white px-4 py-2 rounded ml-[10px]">
+                Buy Now
+              </button>
+            </div>
+          </>
+        )}
+      </div>
+    </dialog>
   );
 };
 

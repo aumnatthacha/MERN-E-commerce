@@ -76,6 +76,50 @@ router.get("/" , async (req,res) => {
     res.status(500).json({message:error.message})
   }  
 })
+
+/**
+ * @swagger
+ * /carts/id/{id}:
+ *   get:
+ *     summary: Get cart by ID
+ *     tags: [Cart]
+ *     parameters:
+ *          - in: path
+ *            name: id
+ *            required: true
+ *            schema:
+ *              type: string
+ *            description: The ID of the cart
+ *     responses:
+ *       200:
+ *         description: The cart details.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Cart'
+ *       404:
+ *         description: Cart Not Found
+ *       500:
+ *         description: Some error happened
+ */
+
+router.get("/id/:id", async (req, res) => {
+  try {
+    const cartId = req.params.id;
+    const cart = await CartsModel.findById(cartId);
+
+    if (!cart) {
+      return res.status(404).json({ message: "Cart Not Found" });
+    }
+
+    res.status(200).json(cart);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+
+
 /**
  * @swagger
  * /carts/{email}:
@@ -146,17 +190,15 @@ router.get("/:email", async (req, res) => {
  */
 
 router.post("/", async (req, res) => {
-  // ตรวจสอบว่า req.body มี property product_id หรือไม่
+
   if (!req.body.product_id) {
     return res.status(400).json({ message: "Missing product_id in req.body" });
   }
-
-  // ดึงข้อมูลผลิตภัณฑ์จากฐานข้อมูล
   try {
+
     const product = await ProductModel.findById(req.body.product_id);
     const productId = product._id.toString();
 
-    // ตรวจสอบว่ามีผลิตภัณฑ์
     if (req.body.product_id !== productId) {
        return res.status(404).json({ message: "Product not found" });
     }
@@ -166,18 +208,13 @@ router.post("/", async (req, res) => {
 
     if (existingCart) {
       if (existingCartByUser) {
-        // ถ้ามีข้อมูลใน Cart อยู่แล้ว และไม่มี Cart ที่อยู่ใน user นี้
         const quantity = Number(req.body.quantity);
         existingCart.quantity += quantity;
         await existingCart.save();
         return res.status(200).json(existingCart);
       }
     }
-
-    // สร้าง CartsModel ด้วย req.body ที่ถูกส่งมา
     const newCart = new CartsModel(req.body);
-
-    // บันทึกลงในฐานข้อมูล
     const savedCart = await newCart.save();
 
     res.status(201).json(savedCart);
