@@ -3,6 +3,7 @@ import useAxiosSecure from "../../hook/useAxiosSecure";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 import { FaTrash } from "react-icons/fa";
+import { GrUpdate } from "react-icons/gr";
 
 
   const ProductListUpdate = () => {
@@ -96,8 +97,9 @@ import { FaTrash } from "react-icons/fa";
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <Link to={`/dashboard/update/${product._id}`}>
-                    <button className="px-3 py-1 text-sm bg-blue-500 text-white rounded hover:bg-blue-600">
-                      Update
+                  
+                    <button className="px-3 py-1 text-sm bg-green-900 text-white rounded hover:bg-green-950">
+                    <GrUpdate />
                     </button>
                   </Link>
                 </td>
@@ -117,7 +119,7 @@ import { FaTrash } from "react-icons/fa";
       {/* Pagination */}
       <div className="flex justify-center my-10">
         <button
-          className={`btn bg-red-500 text-white mx-2 ${
+          className={`btn bg-black hover:bg-black text-white mx-2 ${
             currentPage === 1 ? "opacity-50 cursor-not-allowed" : ""
           }`}
           onClick={() => setCurrentPage(currentPage - 1)}
@@ -126,7 +128,7 @@ import { FaTrash } from "react-icons/fa";
           Back
         </button>
         <button
-          className={`btn bg-red-500 text-white mx-2 ${
+          className={`btn bg-green-900 hover:bg-emerald-950 text-white mx-2 ${
             indexOfLastItem >= product.length
               ? "opacity-50 cursor-not-allowed"
               : ""
