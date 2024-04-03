@@ -1,10 +1,9 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable no-unused-vars */
 import React, { useContext, useState, useEffect } from "react";
 import { AiOutlineClose, AiOutlineDelete } from "react-icons/ai";
 import { FiPlus, FiMinus } from "react-icons/fi";
 import { AuthContext } from "../context/AuthProvider";
 import axios from "axios";
+import Swal from "sweetalert2"; // Import Swal
 
 const Modal = ({ name, reload, totalQuantity, setTotalQuantity }) => {
   const { user, setReload } = useContext(AuthContext);
@@ -115,16 +114,31 @@ const Modal = ({ name, reload, totalQuantity, setTotalQuantity }) => {
       const total = totalQuantity - cartItem.quantity;
       setTotalQuantity(total);
       setReload(true);
+      // Show success notification
+      Swal.fire({
+        icon: "success",
+        title: "Item Deleted",
+        showConfirmButton: false,
+        timer: 1500,
+        position: "top",
+      });
     } catch (error) {
       console.log(error);
     }
   };
-
   const handleClearAll = async (user) => {
     try {
       await axios.delete(`http://localhost:5000/carts/clear/${user.email}`);
       setTotalQuantity(0);
       setReload(true);
+      // แจ้งเตือนว่าลบสำเร็จ
+      Swal.fire({
+        icon: "success",
+        title: "All items cleared successfully",
+        showConfirmButton: false,
+        timer: 1500,
+        position: "top",
+      });
     } catch (error) {
       console.log(error);
     }
